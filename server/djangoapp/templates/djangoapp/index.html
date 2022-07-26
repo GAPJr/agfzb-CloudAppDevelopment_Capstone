@@ -5,7 +5,35 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container">
-        Home page index
+    <div class="container mt-2">
+        <table class="table" id="table" data-filter-control="true">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Dealers Name</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>Zip</th>
+                    <th class="p-2" data-field="state" data-filter-control="select">State</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for dealer in dealers %}
+                <tr>
+                    <td>{{ dealer.id }}</td>
+                    <td><a href="{% url "djangoapp:dealer_details" dealer.id %}">{{ dealer.full_name }}</a></td>
+                    <td>{{ dealer.address }}</td>
+                    <td>{{ dealer.city }}</td>
+                    <td>{{ dealer.zip }}</td>
+                    <td>{{ dealer.st }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
+    <script>
+        $(function() {
+          $('#table').bootstrapTable()
+        })
+      </script>
 {% endblock  %}
